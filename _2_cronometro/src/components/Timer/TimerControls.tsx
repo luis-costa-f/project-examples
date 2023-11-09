@@ -4,13 +4,18 @@ import "./Timer.css"
 interface ITimerControls {
     onStart: () => void,
     onStop: () => void,
+    onReset: () => void,
+    onLap: () => void,
+    timerOn: boolean
 }
 
-const TimerControls = ({onStart, onStop}: ITimerControls) => {
+const TimerControls = ({timerOn, onStart, onStop, onReset, onLap}: ITimerControls) => {
     return (
         <div className="timer-controls">
-            <button onClick={onStart}>Iniciar</button>
-            <button onClick={onStop}>Zerar</button>
+            {!timerOn &&<button onClick={onStart}>Iniciar</button>}
+            {timerOn && <button onClick={onStop}>Parar</button>}
+            {timerOn &&<button onClick={onLap}>Volta</button>}
+            <button onClick={onReset}>Zerar</button>
         </div>
     )
 }

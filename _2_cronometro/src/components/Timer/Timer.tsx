@@ -8,7 +8,7 @@ const Timer = () => {
 
     const [milliseconds, setMilliseconds] = useState<number>(0)
     const [timerOn, setTimerOn] = useState<boolean>(false)
-    const [laps, setLaps] = useState<number[]>([])
+    const [laps, setLaps] = useState<string[]>([])
 
     const formatTime = (): string => {
         const minutes = ("0" + Math.floor(milliseconds / 60000) % 60).slice(-2)
@@ -29,21 +29,39 @@ const Timer = () => {
         return interval
     }
 
+    const resetTimer = (): void => {
+        setMilliseconds(0);
+        setTimerOn(false);
+        setLaps([])
+    }
+
+    const addLap = (): void => {
+        setLaps([...laps, formatTime()]);     
+    }
+
     useEffect(() => {
         let interval: number = 0;
 
         if (timerOn) interval = startTimer()
         else interval = stopTimer(interval)
-    
+
         return () => stopTimer(interval)
 
     }, [timerOn])
 
+    
+
     return (
         <div className="timer-container">
             <TimerDisplay time={formatTime()} />
-            <TimerControls onStart={() => setTimerOn(true)} onStop={() => setTimerOn(false)} />
-            <LapList />
+            <TimerControls
+                timerOn={timerOn}
+                onStart={() => setTimerOn(true)}
+                onStop={() => setTimerOn(false)}
+                onReset={() => resetTimer()} 
+                onLap={() => addLap()}
+                />
+            <LapList lapList={laps}/>
         </div>
     )
 }

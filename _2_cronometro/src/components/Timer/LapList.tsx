@@ -1,11 +1,23 @@
-const LapList = () => {
+interface ILapList {
+    lapList: string[]
+}
+
+const LapList = ({ lapList }: ILapList) => {
     return (
         <div className="timer-laps">
             <h3>Voltas:</h3>
-            <ul>
-                <li>Volta 1: 01:05</li>
-                <li>Volta 2: 02:05</li>
+            {
+                lapList && 
+                <ul>
+                {
+                    lapList.map((lap, index) => {
+                        return (
+                            <li key={index}>{lap}</li>
+                        )
+                    })
+                }
             </ul>
+            }
         </div>
     )
 }
