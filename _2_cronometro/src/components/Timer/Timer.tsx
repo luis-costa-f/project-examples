@@ -46,7 +46,6 @@ const Timer = () => {
         else interval = stopTimer(interval)
 
         return () => stopTimer(interval)
-
     }, [timerOn])
 
     

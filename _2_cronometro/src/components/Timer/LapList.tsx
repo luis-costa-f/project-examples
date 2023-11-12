@@ -12,7 +12,7 @@ const LapList = ({ lapList }: ILapList) => {
                 {
                     lapList.map((lap, index) => {
                         return (
-                            <li key={index}>{lap}</li>
+                            <li key={index}>Volta {index + 1}:  {lap}</li>
                         )
                     })
                 }
