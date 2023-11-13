@@ -25,3 +25,10 @@ If you are developing a production application, we recommend updating the config
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+- será necessario abrir uma conta no  [OPEN WEATHER MAP](https://home.openweathermap.org/) e gerar um nova key, crie um arquivo fora do src chamado ".env" e adicione a sua chave 
+```ts
+   VITE_API_KEY=suaChaveAquió
+```
+ 

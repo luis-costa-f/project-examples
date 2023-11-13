@@ -1,7 +1,8 @@
 const Busca = () => {
     return (
         <div>
-            Busca
+            <input type="text" />
+            <button>Buscar</button>
         </div>
     )
 }
