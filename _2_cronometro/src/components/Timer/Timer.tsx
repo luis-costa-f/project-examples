@@ -4,7 +4,7 @@ import TimerDisplay from "./TimerDisplay"
 import "./Timer.css"
 import { useEffect, useState } from "react"
 
-const Timer = () => {
+const Timer = (): JSX.Element => {
 
     const [milliseconds, setMilliseconds] = useState<number>(0)
     const [timerOn, setTimerOn] = useState<boolean>(false)

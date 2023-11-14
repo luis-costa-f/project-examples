@@ -9,7 +9,7 @@ interface ITimerControls {
     timerOn: boolean
 }
 
-const TimerControls = ({timerOn, onStart, onStop, onReset, onLap}: ITimerControls) => {
+const TimerControls = ({timerOn, onStart, onStop, onReset, onLap}: ITimerControls):JSX.Element => {
     return (
         <div className="timer-controls">
             {!timerOn &&<button onClick={onStart}>Iniciar</button>}

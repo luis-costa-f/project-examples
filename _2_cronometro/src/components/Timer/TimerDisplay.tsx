@@ -4,7 +4,7 @@ interface ITimerDisplay {
     time: string
 }
 
-const TimerDisplay = ({time}: ITimerDisplay):JSX.Element => {
+const TimerDisplay = ({ time }: ITimerDisplay): JSX.Element => {
     return (
         <div className="timer-display">
             {time}

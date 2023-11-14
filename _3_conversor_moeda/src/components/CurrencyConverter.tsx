@@ -10,7 +10,7 @@ const CurrencyConverter = () => {
     const [rates, setRates] = useState<IRate[]>([]);
     const [fromCurrency, setFromCurrency] = useState<string>("USD")
     const [toCurrency, setToCurrency] = useState<string>("BRL")
-    const [amount, setAmount] = useState<number>(0);
+    const [amount, setAmount] = useState<number>(5);
     const [convertedAmount, setConvertedAmount] = useState<number>(0)
 
     useEffect(() => {

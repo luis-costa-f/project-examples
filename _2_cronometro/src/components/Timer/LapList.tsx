@@ -1,6 +1,4 @@
-interface ILapList {
-    lapList: string[]
-}
+import { ILapList } from "./interfaces"
 
 const LapList = ({ lapList }: ILapList) => {
     return (

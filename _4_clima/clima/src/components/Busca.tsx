@@ -6,7 +6,6 @@ interface IBusca {
     buscarClima: () => void;
 }
 
-
 const Busca = ({ cidade, buscarClima, setCidade }: IBusca) => {
     return (
         <div>
