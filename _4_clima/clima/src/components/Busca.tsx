@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { BotaoBuscar, BuscaCidade, BuscaContainer } from "./BuscaStyle";
 
 interface IBusca {
     cidade: string;
@@ -8,10 +9,10 @@ interface IBusca {
 
 const Busca = ({ cidade, buscarClima, setCidade }: IBusca) => {
     return (
-        <div>
-            <input type="text" value={cidade || ""} onChange={(e: ChangeEvent<HTMLInputElement>) => setCidade(e.currentTarget.value)} />
-            <button onClick={() => buscarClima()}>Buscar</button>
-        </div>
+        <BuscaContainer>
+            <BuscaCidade type="text" value={cidade || ""} onChange={(e: ChangeEvent<HTMLInputElement>) => setCidade(e.currentTarget.value)} />
+            <BotaoBuscar onClick={() => buscarClima()}>Buscar</BotaoBuscar>
+        </BuscaContainer>
     )
 }
 

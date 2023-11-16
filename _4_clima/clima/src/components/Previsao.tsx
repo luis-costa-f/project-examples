@@ -1,14 +1,24 @@
-const Previsao = () => {
+import { PrevisaoContainer } from "./PrevisaoStyle"
+import { IPrevisao, IPrevisoes } from "./interfaces"
+
+const Previsao = ({ previsoes }: IPrevisoes): JSX.Element => {    
     return (
-        <div>
+        <PrevisaoContainer>
             <h4>Previsão para as proximas horas</h4>
             <ul>
-                <li>
-                    <img src="" alt="" />
-                    0°C - descrição
-                </li>
+                {
+                    previsoes.map((previsao: IPrevisao) => {
+                        return (
+                            <li key={previsao.dt}>
+                                <img src={`https://openweathermap.org/img/wn/${previsao.weather[0].icon}.png`}
+                                    alt={previsao.weather[0].description} />
+                                {previsao.main.temp}°C - {previsao.weather[0].description}
+                            </li>
+                        )
+                    })
+                }
             </ul>
-        </div>
+        </PrevisaoContainer>
     )
 }
 

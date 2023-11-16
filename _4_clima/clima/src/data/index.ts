@@ -1,4 +1,4 @@
-import { IClima } from "../components/interfaces";
+import { IClima, IPrevisao, IPrevisoes } from "../components/interfaces";
 
 const emptyClima: IClima =  {
     main: {
@@ -9,9 +9,25 @@ const emptyClima: IClima =  {
         {
             description: "",
             icon: ""
-
         }
     ]
 }
 
-export {emptyClima}
+const emptyPrevisao: IPrevisao =  {
+    main: {
+        temp: ""
+    },    
+    weather: [
+        {
+            description: "",
+            icon: ""
+        }
+    ],
+    dt: 0
+}
+
+const emptyPrevisoes: IPrevisoes = {
+    previsoes: [emptyPrevisao]
+}
+
+export {emptyClima, emptyPrevisao, emptyPrevisoes}

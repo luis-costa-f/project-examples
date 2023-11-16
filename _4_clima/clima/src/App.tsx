@@ -1,11 +1,11 @@
-import { useState } from 'react'
-import { Titulo } from './AppStyles'
-import Busca from './components/Busca'
+import { useEffect, useState } from 'react'
+import { ClimaContainer, Titulo } from './AppStyles'
 import ClimaAtual from './components/ClimaAtual'
-import Previsao from './components/Previsao'
-import axios from 'axios'
 import { IClima } from './components/interfaces'
+import Previsao from './components/Previsao'
+import Busca from './components/Busca'
 import { emptyClima } from './data'
+import axios from 'axios'
 
 const App = (): JSX.Element => {
     const [cidade, setCidade] = useState<string>("");
@@ -14,30 +14,59 @@ const App = (): JSX.Element => {
 
     const apiKey = import.meta.env.VITE_API_KEY;
 
-    const buscarClima = async() => {
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const lat = position.coords.latitude
+            const lon = position.coords.longitude
+
+            const respostaClima = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`)
+            setCidade(respostaClima.data.name)
+            setClima(respostaClima.data)
+
+            const respostaPrevisao = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`)            
+            setPrevisao(respostaPrevisao.data.list.slice(0, 5))
+        })
+    }, [apiKey])
+
+    const buscarClima = async () => {
         try {
             const respostaClima = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}&units=metric&lang=pt_br`);
-            const {data} = respostaClima;
+            const dataClima = respostaClima.data;
             const auxClima: IClima = {
-                main: data.main || emptyClima.main,
-                name: data.name || emptyClima.name,
-                weather: data.weather || emptyClima.weather
+                main: dataClima.main || emptyClima.main,
+                name: dataClima.name || emptyClima.name,
+                weather: dataClima.weather || emptyClima.weather
             }
             setClima(auxClima);
+
+            const respostaPrevisao = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cidade}&appid=${apiKey}&units=metric&lang=pt_br`);
+            const dataPrevisao = respostaPrevisao.data.list.slice(0, 5);
+            
+            // dataPrevisao.forEach((prev: IPrevisao) => {
+            //     const auxPrevisao: IPrevisao = {
+            //         dt: prev.dt || emptyPrevisao.dt,
+            //         main: prev.main || emptyPrevisao.main,
+            //         weather: prev.weather || dataClima.weather
+            //     }                
+            //     setPrevisao(prevPrevisao => [...prevPrevisao , auxPrevisao]);
+            // });
+
+            setPrevisao(dataPrevisao)
+            
+
         } catch (error) {
             console.log("Erro ao buscar clima: ", error)
         }
     }
 
-    console.log(clima)
 
     return (
-        <div>
+        <ClimaContainer>
             <Titulo>Condições Climáticas</Titulo>
             <Busca cidade={cidade} setCidade={setCidade} buscarClima={buscarClima} />
-            <ClimaAtual  {...clima}/>
-            <Previsao />
-        </div>
+            {clima && <ClimaAtual  {...clima} />}
+            {previsao.length && <Previsao previsoes={previsao} />}
+        </ClimaContainer>
     )
 }
 export default App
