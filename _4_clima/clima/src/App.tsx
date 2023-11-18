@@ -23,7 +23,7 @@ const App = (): JSX.Element => {
             setCidade(respostaClima.data.name)
             setClima(respostaClima.data)
 
-            const respostaPrevisao = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`)            
+            const respostaPrevisao = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`)
             setPrevisao(respostaPrevisao.data.list.slice(0, 5))
         })
     }, [apiKey])
@@ -41,19 +41,7 @@ const App = (): JSX.Element => {
 
             const respostaPrevisao = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cidade}&appid=${apiKey}&units=metric&lang=pt_br`);
             const dataPrevisao = respostaPrevisao.data.list.slice(0, 5);
-            
-            // dataPrevisao.forEach((prev: IPrevisao) => {
-            //     const auxPrevisao: IPrevisao = {
-            //         dt: prev.dt || emptyPrevisao.dt,
-            //         main: prev.main || emptyPrevisao.main,
-            //         weather: prev.weather || dataClima.weather
-            //     }                
-            //     setPrevisao(prevPrevisao => [...prevPrevisao , auxPrevisao]);
-            // });
-
             setPrevisao(dataPrevisao)
-            
-
         } catch (error) {
             console.log("Erro ao buscar clima: ", error)
         }

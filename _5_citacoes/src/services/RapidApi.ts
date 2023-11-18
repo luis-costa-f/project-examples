@@ -1,5 +1,5 @@
 // api de teste: https://rapidapi.com/dickyagustin/api/text-translator2
-export async function traduzirCitacao(
+export async function traduzirCitacao (
     texto: string,
     idioma: string
 ): Promise<string> {
@@ -18,8 +18,7 @@ export async function traduzirCitacao(
                 headers: {
                     "content-type": "application/x-www-form-urlencoded",
                     "Accept-Encoding": "application/gzip",
-                    "X-RapidAPI-Key":
-                        "0e04fc035fmsh08860d5edc08dbep175764jsna40a51aaebcd",
+                    "X-RapidAPI-Key": import.meta.env.VITE_API_KEY_TRANSLATE,
                     "X-RapidAPI-Host": "text-translator2.p.rapidapi.com",
                 },
             }
