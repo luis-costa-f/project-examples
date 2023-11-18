@@ -1,13 +1,6 @@
 
 import "./Timer.css"
-
-interface ITimerControls {
-    onStart: () => void,
-    onStop: () => void,
-    onReset: () => void,
-    onLap: () => void,
-    timerOn: boolean
-}
+import { ITimerControls } from "./interfaces"
 
 const TimerControls = ({ timerOn, onStart, onStop, onReset, onLap }: ITimerControls): JSX.Element => {
     return (

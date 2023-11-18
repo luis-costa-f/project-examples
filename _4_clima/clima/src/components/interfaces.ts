@@ -1,7 +1,7 @@
 export interface IClima {
     name: string;
     weather: [
-        { 
+        {
             icon: string;
             description: string;
         }
@@ -11,7 +11,7 @@ export interface IClima {
     }
 }
 
-export interface IPrevisao {    
+export interface IPrevisao {
     weather: [
         {
             icon: string;
@@ -23,6 +23,13 @@ export interface IPrevisao {
     }
     dt: number
 }
+
+export interface IBusca {
+    cidade: string;
+    setCidade: (value: string) => void;
+    buscarClima: () => void;
+}
+
 
 export interface IPrevisoes {
     previsoes: IPrevisao[]

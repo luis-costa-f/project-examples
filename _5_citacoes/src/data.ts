@@ -1,4 +1,4 @@
-// src/data.js
+// src/data.ts
 
 import { ICitacao } from "./interfaces";
 

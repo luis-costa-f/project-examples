@@ -1,8 +1,5 @@
 import "./Timer.css"
-
-interface ITimerDisplay {
-    time: string
-}
+import { ITimerDisplay } from "./interfaces"
 
 const TimerDisplay = ({ time }: ITimerDisplay): JSX.Element => {
     return (

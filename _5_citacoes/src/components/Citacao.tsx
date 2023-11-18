@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ICitacao } from "../interfaces"
 import { traduzirCitacao } from "../services/RapidApi";
 
 const Citacao = ({ autor, texto }: ICitacao) => {
-
     const [traducao, setTraducao] = useState<string>("");
 
-    async function onClickTraducao(idioma: string) {
+    async function onClickTraducao (idioma: string) {
         setTraducao(await traduzirCitacao(texto, idioma))
     }
+
+    useEffect(() => {
+        setTraducao("")
+    }, [texto])
 
     return (
         <div>

@@ -5,7 +5,8 @@ import { IClima } from './components/interfaces'
 import Previsao from './components/Previsao'
 import Busca from './components/Busca'
 import { emptyClima } from './data'
-import axios from 'axios'
+
+import { searchForecastsByCity, searchForecastsByCoords, searchWheatherByCity, searchWheatherByCoords } from './services/WeatherApi'
 
 const App = (): JSX.Element => {
     const [cidade, setCidade] = useState<string>("");
@@ -19,18 +20,18 @@ const App = (): JSX.Element => {
             const lat = position.coords.latitude
             const lon = position.coords.longitude
 
-            const respostaClima = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`)
+            const respostaClima = await searchWheatherByCoords(lat, lon)
             setCidade(respostaClima.data.name)
             setClima(respostaClima.data)
 
-            const respostaPrevisao = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`)
+            const respostaPrevisao = await searchForecastsByCoords(lat, lon)
             setPrevisao(respostaPrevisao.data.list.slice(0, 5))
         })
     }, [apiKey])
 
     const buscarClima = async () => {
         try {
-            const respostaClima = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}&units=metric&lang=pt_br`);
+            const respostaClima = await searchWheatherByCity(cidade);
             const dataClima = respostaClima.data;
             const auxClima: IClima = {
                 main: dataClima.main || emptyClima.main,
@@ -39,14 +40,13 @@ const App = (): JSX.Element => {
             }
             setClima(auxClima);
 
-            const respostaPrevisao = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cidade}&appid=${apiKey}&units=metric&lang=pt_br`);
+            const respostaPrevisao = await searchForecastsByCity(cidade);
             const dataPrevisao = respostaPrevisao.data.list.slice(0, 5);
             setPrevisao(dataPrevisao)
         } catch (error) {
             console.log("Erro ao buscar clima: ", error)
         }
     }
-
 
     return (
         <ClimaContainer>

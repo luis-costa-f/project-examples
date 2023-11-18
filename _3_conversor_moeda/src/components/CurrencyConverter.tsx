@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
+import { CurrencyList } from "../services/CurrencyApi";
+import { IRate } from "./interfaces";
 import "./CurrencyConverter.css"
-import axios from "axios";
-
-interface IRate {
-    [currencyCode: string]: number;
-}
 
 const CurrencyConverter = () => {
     const [rates, setRates] = useState<IRate[]>([]);
@@ -14,13 +11,11 @@ const CurrencyConverter = () => {
     const [convertedAmount, setConvertedAmount] = useState<number>(0)
 
     useEffect(() => {
-        axios.get("https://v6.exchangerate-api.com/v6/33332548d2112393d3992002/latest/USD")
-            .then((response) => {
-                setRates(response.data.conversion_rates)
-            }).
-            catch((error) => {
-                console.log("Ocorreu um erro: ", error)
-            })
+        async function setRatesByApi () {
+            setRates(await CurrencyList())
+        }
+
+        setRatesByApi()
     }, [fromCurrency])
 
     useEffect(() => {
@@ -31,9 +26,9 @@ const CurrencyConverter = () => {
 
     }, [amount, rates, fromCurrency, toCurrency])
 
-    if (!rates){
+    if (!rates) {
         return <h1>Carregando...</h1>
-    }    
+    }
 
     return (
         <div className="converter">

@@ -1,11 +1,10 @@
+import { useEffect, useState } from "react"
 import LapList from "./LapList"
 import TimerControls from "./TimerControls"
 import TimerDisplay from "./TimerDisplay"
 import "./Timer.css"
-import { useEffect, useState } from "react"
 
 const Timer = (): JSX.Element => {
-
     const [milliseconds, setMilliseconds] = useState<number>(0)
     const [timerOn, setTimerOn] = useState<boolean>(false)
     const [laps, setLaps] = useState<string[]>([])
@@ -36,7 +35,7 @@ const Timer = (): JSX.Element => {
     }
 
     const addLap = (): void => {
-        setLaps([...laps, formatTime()]);     
+        setLaps([...laps, formatTime()]);
     }
 
     useEffect(() => {
@@ -48,8 +47,6 @@ const Timer = (): JSX.Element => {
         return () => stopTimer(interval)
     }, [timerOn])
 
-    
-
     return (
         <div className="timer-container">
             <TimerDisplay time={formatTime()} />
@@ -57,10 +54,10 @@ const Timer = (): JSX.Element => {
                 timerOn={timerOn}
                 onStart={() => setTimerOn(true)}
                 onStop={() => setTimerOn(false)}
-                onReset={() => resetTimer()} 
+                onReset={() => resetTimer()}
                 onLap={() => addLap()}
-                />
-            <LapList lapList={laps}/>
+            />
+            <LapList lapList={laps} />
         </div>
     )
 }

@@ -1,4 +1,7 @@
 // api de teste: https://rapidapi.com/dickyagustin/api/text-translator2
+
+const apiKey = import.meta.env.VITE_API_KEY_TRANSLATE;
+
 export async function traduzirCitacao (
     texto: string,
     idioma: string
@@ -18,7 +21,7 @@ export async function traduzirCitacao (
                 headers: {
                     "content-type": "application/x-www-form-urlencoded",
                     "Accept-Encoding": "application/gzip",
-                    "X-RapidAPI-Key": import.meta.env.VITE_API_KEY_TRANSLATE,
+                    "X-RapidAPI-Key": apiKey,
                     "X-RapidAPI-Host": "text-translator2.p.rapidapi.com",
                 },
             }

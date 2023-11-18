@@ -42,7 +42,6 @@ const Calculator = () => {
         const num2 = parseFloat(currentValue);
 
         let result: number = 0;
-
         switch (pendingOperation) {
             case "+":
                 result = num1 + num2
@@ -66,7 +65,6 @@ const Calculator = () => {
                 break;
             default:
                 break;
-
         }
 
         setcompleteOperation(pendingValue + " " + pendingOperation + " " + currentValue + " = " + result)
