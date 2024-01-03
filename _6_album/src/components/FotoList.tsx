@@ -1,12 +1,12 @@
 import Foto from "./Foto"
-import { IFoto, IFotos } from "./Interfaces"
+import { IFotos, IImageApi } from "./Interfaces"
 
-const FotoList = ({ fotos }: IFotos) => {
+const FotoList = ({ fotos, setFotoAmpliada }: IFotos) => {
     return (
         <div className="album">
             {
-                fotos && fotos.map((foto: IFoto) => (
-                    <Foto key={foto.id} alt_description={foto.alt_description} urls={foto.urls} />
+                fotos && fotos.map((foto: IImageApi) => (
+                    <Foto key={foto.id} dados={foto} setFotoAmpliada={setFotoAmpliada}/>
                 ))
             }
         </div>
