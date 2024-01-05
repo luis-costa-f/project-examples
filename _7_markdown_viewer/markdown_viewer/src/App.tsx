@@ -18,7 +18,22 @@ const App = () => {
         setText(newText)
     }
 
-    
+    const insertText = (before: string, after: string): void => {
+        const textArea = textAreaRef.current;
+
+        if (textArea) {
+            const start = textArea.selectionStart;
+            const end = textArea.selectionEnd;
+
+            const previousText = textArea.value;
+            const beforeText = previousText.substring(0, start);
+            const selectText = previousText.substring(start, end);
+            const afterText = previousText.substring(end);
+
+            const newText =  `${beforeText}${before}${selectText}${after}${afterText}`;
+            setText(newText);
+        }
+    }
 
     useEffect(() => {
         localStorage.setItem("markdownText", text);
@@ -27,7 +42,7 @@ const App = () => {
     return (
         <div>
             <div className="app-container">
-                <Toolbar />
+                <Toolbar insertText={insertText} />
                 <textarea
                     ref={textAreaRef}
                     value={text}
