@@ -1,11 +1,16 @@
+name: Multi-project Lint
+
 on:
   push:
   pull_request:
 
 jobs:
-  eslint:
-    name: ESLint
+  lint-all-projects:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project:
+          - _1_calculadora
 
     steps:
       - name: Checkout code
@@ -14,12 +19,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16 # ou a versão que atende às necessidades do seu projeto
+          node-version: 16 # ou a versão desejada
 
       - name: Install dependencies
         run: yarn install
 
       - name: Run ESLint
-        uses: icrawl/action-eslint@v1
-        with:
-          custom-glob: apps # ajuste conforme necessário
+        run: yarn lint --project ${{ matrix.project }}
