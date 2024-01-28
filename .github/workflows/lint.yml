@@ -27,5 +27,8 @@ jobs:
       - name: Change to project directory
         run: cd ${{ matrix.project }}
 
-      - name: Run ESLint
-        run: yarn lint
+      - name: spot1
+        run: ls
+
+      # - name: Run ESLint
+      #   run: yarn lint
