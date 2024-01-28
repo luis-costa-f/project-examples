@@ -4,17 +4,22 @@ on:
 
 jobs:
   eslint:
-    name: eslint
+    name: ESLint
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v1
-      - name: install node v20
-        uses: actions/setup-node@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: 20
-      - name: yarn install
+          node-version: 16 # ou a versão que atende às necessidades do seu projeto
+
+      - name: Install dependencies
         run: yarn install
-      - name: eslint
+
+      - name: Run ESLint
         uses: icrawl/action-eslint@v1
         with:
-          custom-glob: apps # only if a different glob is needed, default: src
+          custom-glob: apps # ajuste conforme necessário
