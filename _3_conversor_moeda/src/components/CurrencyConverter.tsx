@@ -4,7 +4,7 @@ import { IRate } from "./interfaces";
 import "./CurrencyConverter.css"
 
 const CurrencyConverter = () => {
-    const [rates, setRates] = useState<IRate[]>([]);
+    const [rates, setRates] = useState<IRate[] | null>(null);
     const [fromCurrency, setFromCurrency] = useState<string>("USD")
     const [toCurrency, setToCurrency] = useState<string>("BRL")
     const [amount, setAmount] = useState<number>(5);
@@ -12,17 +12,23 @@ const CurrencyConverter = () => {
 
     useEffect(() => {
         async function setRatesByApi () {
-            setRates(await CurrencyList())
+            const lista = await CurrencyList<IRate[]>();
+
+            if (lista) {
+                setRates(lista)
+            }
         }
 
         setRatesByApi()
     }, [fromCurrency])
 
     useEffect(() => {
-        const rateFrom = Number(rates[fromCurrency]) || 0;
-        const rateTo = Number(rates[toCurrency]) || 0;
-        const result = (amount / rateFrom) * rateTo
-        setConvertedAmount(Number(result.toFixed(2)));
+        if (rates) {
+            const rateFrom = Number(rates[fromCurrency]) || 0;
+            const rateTo = Number(rates[toCurrency]) || 0;
+            const result = (amount / rateFrom) * rateTo
+            setConvertedAmount(Number(result.toFixed(2)));
+        }
 
     }, [amount, rates, fromCurrency, toCurrency])
 
