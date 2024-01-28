@@ -7,10 +7,6 @@ on:
 jobs:
   lint-all-projects:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        project:
-          - _1_calculadora
 
     steps:
       - name: Checkout code
@@ -24,11 +20,12 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Change to project directory
-        run: cd ./${{ matrix.project }}
+      - name: Run ESLint on all projects
+        run: |
+          projects=("_1_calculadora")
 
-      - name: spot1
-        run: ls
-
-      # - name: Run ESLint
-      #   run: yarn lint
+          for project in "${projects[@]}"; do
+            cd $project
+            yarn lint
+            cd ..
+          done
