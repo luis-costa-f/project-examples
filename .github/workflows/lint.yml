@@ -24,5 +24,8 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Change to project directory
+        run: cd ${{ matrix.project }}
+
       - name: Run ESLint
-        run: yarn lint --project ${{ matrix.project }}
+        run: yarn lint
