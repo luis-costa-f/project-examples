@@ -1,8 +1,31 @@
-const TimezoneClock = () => {
+import { useEffect, useState } from "react"
+import { ITimeZoneClock } from "./interface"
+
+const TimezoneClock = ({ timeZone }: ITimeZoneClock) => {
+
+    const [time, setTime] = useState<string>("");
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            const date = new Date();
+
+            const options: Intl.DateTimeFormatOptions = {
+                timeZone,
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+            };
+
+            const timeString = date.toLocaleTimeString("en-US", options);
+
+            setTime(timeString)
+        }, 1000)
+    }, [timeZone])
+
     return (
         <div>
-            <h2>Timezone</h2>
-            <h3>Tempo</h3>
+            <h2>{timeZone}</h2>
+            <h3>{time}</h3>
         </div>
     )
 }
