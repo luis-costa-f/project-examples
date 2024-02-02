@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+}
+
+div {
+    text-align: center;
+}
+
+h1 {
+    background: #6200ea;
+    color: #FFF;
+    margin: 0;
+    padding: 1rem
+}
+
+select {
+    margin: 1rem;
+    padding: 0.5rem;
+}

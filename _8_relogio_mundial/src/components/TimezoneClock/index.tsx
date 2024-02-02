@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react"
-import { ITimeZoneClock } from "./interface"
+import { useEffect, useState } from "react";
+import { ITimeZoneClock } from "./interface";
+import "./styles.css";
 
 const TimezoneClock = ({ timeZone }: ITimeZoneClock) => {
 
     const [time, setTime] = useState<string>("");
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
+        setInterval(() => {
             const date = new Date();
 
             const options: Intl.DateTimeFormatOptions = {
@@ -23,11 +24,11 @@ const TimezoneClock = ({ timeZone }: ITimeZoneClock) => {
     }, [timeZone])
 
     return (
-        <div>
+        <div className="timezone">
             <h2>{timeZone}</h2>
             <h3>{time}</h3>
         </div>
     )
 }
 
-export default TimezoneClock
+export default TimezoneClock;
