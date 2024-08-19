@@ -28,7 +28,7 @@ jobs:
       - name: Define projects
         id: define-projects
         run: |
-          echo "PROJECTS=calculator another-project" >> $GITHUB_ENV
+          echo "PROJECTS=1_calculadora/calculadora" >> $GITHUB_ENV
 
       - name: Run lint and prettier checks
         run: |
@@ -58,7 +58,7 @@ jobs:
       - name: Define projects
         id: define-projects
         run: |
-          echo "PROJECTS=calculator another-project" >> $GITHUB_ENV
+          echo "PROJECTS=1_calculadora/calculadora" >> $GITHUB_ENV
 
       - name: Run tests
         run: |
