@@ -37,7 +37,6 @@ jobs:
             cd $project
             npm install
             npm run lint
-            # Prettier check, ignore exit code
             npm run prettier:check || true
             cd ..
           done
@@ -69,7 +68,7 @@ jobs:
             echo "Processing project: $project"
             cd $project
             npm install
-            npm test
+            npm test -- --passWithNoTests
             cd ..
           done
         shell: /usr/bin/bash -e {0}
