@@ -23,19 +23,23 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # Use a versão de Node.js que você prefere
+          node-version: '18'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Define projects
+        id: define-projects
+        run: |
+          echo "PROJECTS=calculator another-project" >> $GITHUB_ENV
 
-      - name: Run ESLint
-        run: npm run lint
-
-      - name: Run Prettier check
-        run: npm run prettier:check  # Certifique-se de ter um script de Prettier no package.json
-
-      - name: Run Prettier check
-        run: npm run prettier:check
+      - name: Run lint and prettier checks
+        run: |
+          for project in $PROJECTS; do
+            echo "Processing project: $project"
+            cd $project
+            npm install
+            npm run lint
+            npm run prettier:check
+            cd ..
+          done
 
   test:
     name: Run Tests
@@ -50,8 +54,17 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Define projects
+        id: define-projects
+        run: |
+          echo "PROJECTS=calculator another-project" >> $GITHUB_ENV
 
-      - name: Run Tests
-        run: npm test
+      - name: Run tests
+        run: |
+          for project in $PROJECTS; do
+            echo "Processing project: $project"
+            cd $project
+            npm install
+            npm test
+            cd ..
+          done
