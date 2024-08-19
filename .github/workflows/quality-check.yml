@@ -34,10 +34,11 @@ jobs:
         run: |
           for project in $PROJECTS; do
             echo "Processing project: $project"
-            cd $project
+            cd $project/$project
             npm install
             npm run lint
             npm run prettier:check
+            cd ..
             cd ..
           done
 
