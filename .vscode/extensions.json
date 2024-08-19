@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "oderwat.indent-rainbow",
+        "ms-vscode.vscode-typescript-next",
+        "dsznajder.es7-react-js-snippets",
+        "github.vscode-github-actions"
+    ]
+}
