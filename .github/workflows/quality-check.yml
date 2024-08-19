@@ -28,19 +28,21 @@ jobs:
       - name: Define projects
         id: define-projects
         run: |
-          echo "PROJECTS=1_calculadora/calculadora" >> $GITHUB_ENV
+          echo "PROJECTS=1_calculadora/calculadora another-project" >> $GITHUB_ENV
 
       - name: Run lint and prettier checks
         run: |
           for project in $PROJECTS; do
             echo "Processing project: $project"
-            cd $project/$project
+            cd $project
             npm install
             npm run lint
             npm run prettier:check
             cd ..
-            cd ..
           done
+        shell: /usr/bin/bash -e {0}
+        env:
+          PROJECTS: ${{ env.PROJECTS }}
 
   test:
     name: Run Tests
@@ -58,7 +60,7 @@ jobs:
       - name: Define projects
         id: define-projects
         run: |
-          echo "PROJECTS=1_calculadora/calculadora" >> $GITHUB_ENV
+          echo "PROJECTS=1_calculadora/calculadora another-project" >> $GITHUB_ENV
 
       - name: Run tests
         run: |
@@ -69,3 +71,6 @@ jobs:
             npm test
             cd ..
           done
+        shell: /usr/bin/bash -e {0}
+        env:
+          PROJECTS: ${{ env.PROJECTS }}
