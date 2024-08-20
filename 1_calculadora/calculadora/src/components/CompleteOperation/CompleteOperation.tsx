@@ -1,8 +1,9 @@
 import "./CompleteOperation.css";
+import ICompleteOperation from "./ICompleteOperation";
 
-const CompleteOperation = () => {
+const CompleteOperation = ({ completeOperation }: ICompleteOperation) => {
     return (
-        <div className="complete-operation">3 + 3 = 6</div>
+        <div className="complete-operation">{completeOperation}</div>
     );
 };
 

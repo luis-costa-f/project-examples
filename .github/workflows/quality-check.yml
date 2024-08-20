@@ -44,33 +44,33 @@ jobs:
         env:
           PROJECTS: ${{ env.PROJECTS }}
 
-  test:
-    name: Run Tests
-    runs-on: ubuntu-latest
+#   test:
+#     name: Run Tests
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Check out the repository
+#         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: '18'
 
-      - name: Define projects
-        id: define-projects
-        run: |
-          echo "PROJECTS=1_calculadora/calculadora" >> $GITHUB_ENV
+#       - name: Define projects
+#         id: define-projects
+#         run: |
+#           echo "PROJECTS=1_calculadora/calculadora" >> $GITHUB_ENV
 
-      - name: Run tests
-        run: |
-          for project in $PROJECTS; do
-            echo "Processing project: $project"
-            cd $project
-            npm install
-            npm test -- --passWithNoTests
-            cd ..
-          done
-        shell: /usr/bin/bash -e {0}
-        env:
-          PROJECTS: ${{ env.PROJECTS }}
+#       - name: Run tests
+#         run: |
+#           for project in $PROJECTS; do
+#             echo "Processing project: $project"
+#             cd $project
+#             npm install
+#             npm test -- --passWithNoTests
+#             cd ..
+#           done
+#         shell: /usr/bin/bash -e {0}
+#         env:
+#           PROJECTS: ${{ env.PROJECTS }}

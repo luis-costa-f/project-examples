@@ -1,15 +1,17 @@
 import './Buttons.css';
+import { IButton } from './IButton';
 
-const Buttons = () => {
-    const keypadNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-    const operations = ['+', '-', '*', '/'];
+const keypadNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+const operations = ['+', '-', '*', '/'];
+
+const Buttons = ({ handleClick, handleClear }: IButton) => {
 
     return (
         <div className="buttons">
-            <button>AC</button>
+            <button onClick={() => handleClear()}>AC</button>
             {
                 keypadNumbers.map((num) => (
-                    <button key={num}>{num}</button>
+                    <button key={num} onClick={() => handleClick(num)}>{num}</button>
                 ))
             }
             {

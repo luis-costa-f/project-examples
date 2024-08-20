@@ -1,8 +1,9 @@
 import "./Display.css";
+import { IDisplay } from "./IDisplay";
 
-const Display = () => {
+const Display = ({ currentValue }: IDisplay) => {
     return (
-        <div className="display">6</div>
+        <div className="display">{currentValue}</div>
     );
 };
 
