@@ -1,4 +1,6 @@
 export interface IButton {
     handleClick: (num: string) => void;
-    handleClear: () => void
+    handleOperation: (operation: string) => void;
+    handleClear: () => void;
+    handleCalculate: () => void;
 }

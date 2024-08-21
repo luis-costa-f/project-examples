@@ -4,7 +4,7 @@ import { IButton } from './IButton';
 const keypadNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 const operations = ['+', '-', '*', '/'];
 
-const Buttons = ({ handleClick, handleClear }: IButton) => {
+const Buttons = ({ handleClick, handleClear, handleOperation, handleCalculate }: IButton) => {
 
     return (
         <div className="buttons">
@@ -16,10 +16,10 @@ const Buttons = ({ handleClick, handleClear }: IButton) => {
             }
             {
                 operations.map((operation) => (
-                    <button key={operation}>{operation}</button>
+                    <button key={operation} onClick={() => handleOperation(operation)}>{operation}</button>
                 ))
             }
-            <button>=</button>
+            <button onClick={() => handleCalculate()}>=</button>
         </div>
     );
 };
