@@ -21,7 +21,7 @@ export default [
         },
         rules: {
             "react/react-in-jsx-scope": "off", // Desativa a regra se não for necessário importar o React
-            "indent": ["error", 4], // Configura a indentação para 4 espaços
+            "indent": ["error", 4, { "SwitchCase": 1 }], // Configura a indentação para 4 espaços
             "semi": ["error", "always"], // Garante que o ponto e vírgula seja obrigatório
         },
     },

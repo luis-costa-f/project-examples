@@ -26,8 +26,8 @@ const Calculator = () => {
         setCompleteOperation(currentValue + " " + operation + " ");
         setPendingOperation(operation);
         setPendingValue(currentValue);
-        setCurrentValue("0")
-    }
+        setCurrentValue("0");
+    };
 
     const handleClear = () => {
         setCurrentValue("0");
@@ -75,7 +75,7 @@ const Calculator = () => {
         setCurrentValue(result.toString());
         setPendingOperation(null);
         setPendingValue(null);
-    }
+    };
 
     return (
         <div className="calculator">
